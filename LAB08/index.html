@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB08</title>
+</head>
+<body>
+    <div>
+        <form class="form-container" method="get" action="127.0.0.1:8080/getForm">
+
+            <input type="text" placeholder="Номер студенческой группы">
+            <input type="text" placeholder="ФИО">
+
+            <div class="numbers-for-server">
+                <input type="number" placeholder="Целое число">
+                <input type="number" placeholder="Целое число">
+                <input type="number" placeholder="Целое число">
+                <input type="number" placeholder="Целое число">
+                <input type="number" placeholder="Числа с плавающей точкой" step="0.1">
+            </div>
+
+            <!-- переключатель, имеющий значения: "Полный", "Сжатый" -->
+            
+            <div class="switch-1">
+                <label for="checkbox-full"> 
+                    <input type="radio" id="checkbox-full" name="checkbox-1" value="full"> 
+                    Полный 
+                </label>
+
+            
+                <label for="checkbox-compressed"> 
+                    <input type="radio" id="checkbox-compressed" name="checkbox-1" value="compressed">
+                    Сжатый 
+                </label>
+            </div>
+
+            <!-- переключатель для задания нескольких задач обработки введенных данных -->
+
+
+            <div class="switch-2">
+                <label for="checkbox-s"> 
+                    <input type="radio" id="checkbox-s" name="checkbox-2" value="s"> 
+                    Сумма 
+                </label>
+
+            
+                <label for="checkbox-rd"> 
+                    <input type="radio" id="checkbox-rd" name="checkbox-2" value="rd">
+                    По убыванию 
+                </label>
+
+
+                <label for="checkbox-m"> 
+                    <input type="radio" id="checkbox-m" name="checkbox-2" value="m">
+                    Среднее 
+                </label>
+            </div>
+            
+
+            <div class="sumbit-buttons"> 
+                <input type="reset">
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

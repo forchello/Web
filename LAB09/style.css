@@ -1,0 +1,102 @@
+body {
+    background-color: bisque;
+
+    font-size: 14px;
+    font-family: Verdana;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: beige;
+    
+    margin-left: 20%;
+    margin-right: 20%;
+
+    padding: 40px 20px 20px 20px;
+}
+
+.numbers-for-server {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+input[type=radio] {
+    width: 20px;
+}
+
+input[type=submit] {
+    display: flex;
+    flex: 6; 
+
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="reset"] {
+    display: flex;
+    flex: 1;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.switch-1 {
+    display: flex; 
+    flex-direction: column;
+
+    background-color: white; 
+    width: 200px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label input{
+    margin-top: 20px;
+}
+
+.switch-2 {
+    margin-top: 20px;
+    display: flex; 
+    flex-direction: column;
+
+    background-color: white; 
+    width: 200px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.sumbit-buttons {
+    display: flex;
+    flex-direction: row;
+
+    flex: 1;
+
+    max-width: 200px;
+
+    
+    margin-top: 30px;
+}

@@ -1,0 +1,33 @@
+body {
+    background-color: red;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.number {
+    margin: 0;  
+    position: absolute;
+
+    user-select: none;
+
+    font-family: Verdana;
+    font-size: 10px;
+
+    color: white;
+
+    top: 510px;
+    left: 650px;
+    
+    font-size: 150px;
+}
+
+.dot {
+    position:absolute;
+    width:7px;
+    height:7px;
+    background-color:#0000bf;
+}

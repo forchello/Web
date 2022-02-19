@@ -1,0 +1,32 @@
+.unord-list-1 {
+    list-style-type: decimal-leading-zero; 
+
+    margin-top: 50px;
+}
+
+.unord-list-2 {
+    list-style-type: lower-alpha;
+
+    margin-top: 50px;
+}
+
+.unord-list-3 {
+    color: blue;
+
+    font-family: Verdana;
+    font-size: 20px;
+
+    list-style-type: none;
+
+    margin-top: 50px;
+}
+
+.unord-list-3 .unord-li-3::before {
+    content: "{ ";
+}
+
+.unord-list-4 {
+    list-style-image: url("https://img.icons8.com/glyph-neue/64/000000/ps.png");
+
+    margin-top: 50px;
+}

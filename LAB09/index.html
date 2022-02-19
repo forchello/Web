@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB09</title>
+</head>
+<body>
+    <div id="main-container">
+        <button onclick="startTest()"> Начать тестирование </button>
+        <div id="test-result">
+            <h3 id="group"> </h3>
+            <h3 id="name"> </h3>
+            <h3 id="mark"> </h3>
+        </div>
+    </div>
+
+    <script> 
+
+        let group = '';
+        let name = '';
+
+        alert('Привет!');
+
+        const startTest = () => {
+            try {
+                login();
+                task();
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        const login = () => {
+            group = prompt('Введите название группы:', ["КН-920В"]);
+            name = prompt('Введите вашу фамилию:');
+
+            if ( group === '' || name === '' ) {
+                throw new Error('The fields are filled in incorrectly!');
+            }
+        }
+
+        const task = () => {
+            let result = [];
+            
+            result.push(confirm("GATEWAY_INERFACE содержит информацию о версии CGI(CGI/версия)"));
+            result.push(confirm("GATEWAY_INERFACE содержит информацию о версии CGI(CGI/версия)"));
+            result.push(confirm("GATEWAY_INERFACE содержит информацию о версии CGI(CGI/версия)"));
+            result.push(confirm("GATEWAY_INERFACE содержит информацию о версии CGI(CGI/версия)"));
+            result.push(confirm("GATEWAY_INERFACE содержит информацию о версии CGI(CGI/версия)"));
+
+            evaluation(result);
+        }
+
+        const evaluation = (result) => {
+            let mark = 0;
+
+            for ( const i of result ) {
+                if ( i ) {
+                    mark++;
+                }
+            }
+
+            document.getElementById("group").innerHTML = group;
+            document.getElementById("name").innerHTML = name;
+            document.getElementById("mark").innerHTML = mark;
+        }
+    </script>
+</body>
+</html>

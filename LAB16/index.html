@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB16</title>
+</head>
+<body>
+    
+    <div id="main-container">
+        <form id="form-container" class="form-container">
+
+            <input id="faculty" type="text" placeholder="Факультет" required>
+
+            <input id="group" 
+                   type="text" 
+                   placeholder="Группа" 
+                   pattern="Группа\s[А-Яа-яё]{2,4}[-]\d\d\d[А-Яа-яё]"
+                   title="Группа {}-920{А-Я}"
+                   required
+                   >
+
+            <input id="name" 
+                   type="text" 
+                   placeholder="ФИО"
+                   required
+                   >
+                
+
+            <input id="student_record_book" 
+                   type="number" 
+                   placeholder="Номер зачетной книжки" 
+                   min="1000" 
+                   max="10000"
+                   required
+                   >
+
+            <input id="phone" type="text" placeholder="+380" required>
+
+            <button type="submit"> Проверить </button>
+        </form>
+    </div>
+
+    <script>
+
+        const submit = () => {
+
+            const new_window = window.open("","","width=400, height=400");
+
+                if ( new_window ) {      
+                     
+                    windowIsOpen = true;
+
+                    new_window.moveBy(100,100);
+                    new_window.document.open(); 
+                    new_window.document.write("<h1> Form is send </h1>");
+
+                    new_window.document.close();
+                    new_window.setTimeout('self.close()', 1000); 
+                } else alert("Error");
+            
+            location.reload();
+            event.preventDefault();
+        }
+
+        const checkName = (event) => {
+
+            const name = document.getElementById('name').value;
+            const regex = new RegExp('Фамилия\\sИ\\.\\s\\W+\\s\\W+', 'ig');
+
+            if ( name !== '') {
+                if ( regex.exec(name) !== null ) {
+                    document.getElementById('name').setCustomValidity("");
+                    console.log('form name is correct');
+                } else {
+                    document.getElementById('name').setCustomValidity("Фамилия И. {} {}");
+                }      
+            } else {
+                document.getElementById('name').setCustomValidity("");
+            }
+
+        }
+
+        const checkPhone = (event) => {
+            
+            const phone = document.getElementById('phone').value;
+            const regex = /Тел\s№\s[0-9]{3}-[0-9]{2}-[0-9]{2}/ig;
+
+            if ( phone !== '' ) {
+                if ( regex.exec(phone) !== null ) {
+                    document.getElementById('phone').setCustomValidity("");
+                    console.log('form name is correct');
+                } else {
+                    document.getElementById('phone').setCustomValidity("Тел № {xxx-xx-xx}");
+                }      
+            } else {
+                document.getElementById('name').setCustomValidity("");
+            }
+        }
+
+        document.getElementById('name').addEventListener('input', checkName );
+
+        document.getElementById('phone').addEventListener('input', checkPhone );
+
+        document.getElementById('form-container').addEventListener('submit', submit);
+
+    </script>
+
+</body>
+</html>
+

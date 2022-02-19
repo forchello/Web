@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB10</title>
+</head>
+<body>
+    <div id="main-container">
+        <button onclick="log()"> Массив </button>
+
+        <button onclick="mysplice()"> Порезать массив </button>
+
+        <button onclick="checkTypes()"> Проверить типы </button>
+
+        <button onclick="maxsize()"> Найти макс число </button>
+
+        <button onclick="logMap()"> Ассоциативный массив </button>
+
+        <button onclick="lastAlphabet()"> Последний в алфавите ключ </button>
+
+        <button onclick="logBigMap()"> Ассоциативный многомерный массив </button>
+
+        <button onclick="alert(navigator.userAgent);"> Браузер </button>
+    </div>
+
+    <script> 
+
+        let array = [1,2,3,4,5,'1','2','3','2','5'];
+        let arrayTypes = [];
+
+        const log = () => {
+            console.log(array);
+        }
+
+        const mysplice = () => {
+            array.splice(3, 4); //  режет с 3 по 7
+            console.log(array);
+        }
+
+        const checkTypes = () => {
+            for ( const i of array ) {
+                arrayTypes.push(typeof(i));
+            }
+
+            console.log(arrayTypes);
+        }
+
+        const maxsize = () => {
+            let max = 0;
+
+            for ( const i of array ) {           
+                if ( i > max ) {
+                    max = i;
+                }
+            }   
+
+            console.log(`max size is --> ${max}`);
+        }
+        
+        
+        const logMap = () => {
+            console.log(arrayMap);
+        }
+
+        let arrayMap = new Map([
+            ['а', 'Текст1'], 
+            ['г', 'Текст2'], 
+            ['я', 'Текст3'], 
+            ['в', 'Текст4'], 
+            ['б', 'Текст5']
+        ]);
+        
+        const lastAlphabet = () => {
+            let max = '';
+
+            for ( const key of arrayMap.keys() ) {
+                if ( max < key ) {
+                    max = key;
+                }
+            }
+
+            console.log(max);
+        }
+
+        const logBigMap = () => {
+            const arrayBigMap = {
+                1: [
+                    ['а', 'Текст1'],
+                    ['б', 'Текст2'],
+                    ['в', 'Текст3'],
+                    ['г', 'Текст4'], 
+                    ['д', 'Текст5'],
+                ],
+                2: [
+                    ['е', 'Текст6'], 
+                    ['ё', 'Текст7'], 
+                    ['ж', 'Текст8'],
+                    ['з', 'Текст9'], 
+                    ['и', 'Текст10'],
+                ],
+                3: [
+                    ['й', 'Текст11'],
+                    ['к', 'Текст12'], 
+                    ['л', 'Текст13'], 
+                    ['м', 'Текст14'], 
+                    ['г', 'Текст15']
+                ]
+            };
+
+            console.log(arrayBigMap);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB12</title>
+</head>
+<body>
+    <div id="main-container">
+        <div id="div"> 
+            <h1 id="number" class="number"> 1 </h1>
+        </div>
+    </div>
+
+    <script>    
+        
+        const numberUp = () => {
+            const value = parseInt(document.getElementById('number').innerText) + 1;
+            document.getElementById('number').innerText = value.toString();
+        }
+
+        const NumberReset = () => {
+            document.getElementById('number').innerText = '1';
+        }
+
+        
+        let left_ = 650, top_= 510, dx = 10, dy = 3, activity_state = true;
+
+        const f = (x) => { return 1000 / ( x + 25 ) }
+
+        const createGraf = (event) => {      
+            
+            if ( activity_state ) {
+                const dv = document.createElement("DIV");
+                dv.className = "dot";
+                dv.style.left = left_+ "px";
+                dv.style.top = top_ + "px";
+                document.body.appendChild(dv);
+
+                event.toElement.style = '';
+                event.toElement.style.left = left_ + "px";
+                event.toElement.style.top = top_ + "px";      
+
+                if ( left_ > 0 && top_ > 0 ) {
+                    df = f( left_ - dx ) - f( left_ );
+                    left_ -= dy;
+                    top_ = top_ - dx - df;
+                    setTimeout(() => createGraf(event), 100);
+                } else {  
+                    activity_state = false;
+                }
+            } else {
+                activity_state = true;
+
+                const dotes = Array.from(document.getElementsByClassName('dot'));
+
+
+                for ( const dot of dotes ) {
+                    dot.remove();
+                }
+
+                event.toElement.style = '';
+
+                left_ = 650;
+                top_ = 510;
+
+                event.toElement.style.left = left_ + "px";
+                event.toElement.style.top = top_ + "px";
+            }
+        }
+
+        const NumberActivity = () => {
+            let interval;
+
+            const mouseover = () => {
+                clearInterval(interval);
+
+                interval = setInterval(() => {
+                    numberUp();       
+                }, 200)
+            }
+
+            const mouseout = () => {
+                clearInterval(interval);
+            }
+
+            document.getElementById('number').onmouseover = mouseover;
+            document.getElementById('number').onmouseout = mouseout;
+
+            document.getElementById('number').ondblclick = createGraf;
+        }
+
+        try {
+            NumberActivity();
+        } catch (error) {
+            console.log(error);
+        }
+
+    </script>
+</body>
+</html>
+

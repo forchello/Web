@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB15</title>
+</head>
+<body>
+    
+    <div id="main-container">
+
+        <di class="text-container">
+            <h2> Статистика посещения людей с начальным образованием:</h2>
+            <h1 id="h3"></h1>
+        </div>
+
+        <form id="form-container" class="form-container">
+            <input id="name" type="text" placeholder="ФИО">
+
+            <p> Пол: </p>
+            <select id="selectoption_gender">
+                <option> Мужской </option>
+                <option> Женский </option>
+            </select>
+
+            <p> Образование: </p>
+            <select id="selectoption_education">
+                <option> Начальное </option>
+                <option> Среднее </option>
+                <option> Высшее </option>
+            </select>
+            
+            <p> Фото здания: </p>
+            <select id="selectoption_photo" class="selectoption_photo">
+                <option> 1 </option>
+                <option> 2 </option>
+                <option> 3 </option>
+                <option> 4 </option>
+            </select>
+            
+            <p> Предосмотр: </p>
+            <img id='result' src="src/images/1.jpg" width="300" height="200">
+
+            <button type="button" onClick="checkCookie()"> Проверить кукисы </button>
+            <button type="submit">Submit form</button>
+        </form>
+    </div>
+
+    <script>
+        
+        document.getElementById('selectoption_photo').addEventListener('change', (event) => {
+            document.getElementById('result').src = 'src/images/' + event.target.value + '.jpg';
+        });
+
+        let windowIsOpen = false;
+
+        window.addEventListener('keydown', (event) => {
+
+            if ( event.code === 'KeyA' && event.altKey ) {
+
+                if ( document.cookie === '' ) {
+                    document.getElementById('h3').innerText = '0%';
+                    return;
+                }
+
+                let all, elementary;
+
+                for ( const cookie of document.cookie.split('; ') ) {
+                    switch ( cookie.split('=')[0] ) {
+                        case 'elementary': {
+                            elementary = cookie.split('=')[1];
+                            break;
+                        }
+                        case 'all': {
+                            all = cookie.split('=')[1];
+                            break;
+                        }
+                    }
+                }
+
+                const result = ( elementary * 100 ) / all;
+                
+                if ( Number(result) === result && result % 1 !== 0 ) {
+                    document.getElementById('h3').innerText = (Math.round(result)).toString() + '%';
+                } else if ( Number(result) === result && result % 1 === 0 ) {
+                    document.getElementById('h3').innerText = result.toString() + '%';
+                } else {
+                    document.getElementById('h3').innerText = 'unknown%';
+                }
+               
+            } else if ( event.code === 'KeyA' && event.shiftKey )   {
+                document.getElementById('h3').innerText = '';
+            }
+        })
+
+        const resultWindow = (photoNumber) => {
+            const imageWindow = window.open("","","width=330, height=385");
+
+                if ( imageWindow ) {      
+                     
+                    windowIsOpen = true;
+
+                    imageWindow.moveBy(50,50);
+                    imageWindow.document.open(); 
+                    imageWindow.document.write("<img id='imageWindow' width='300' height=300' />");
+                    
+                    imageWindow.document.getElementById('imageWindow').src = `src/images/${photoNumber}.jpg`
+
+                    imageWindow.document.close();
+                    imageWindow.setTimeout('self.close()', 5000); 
+                } else alert("Error");
+            }
+
+        const checkResult = () => {
+
+            for ( const cookie of document.cookie.split('; ') ) {
+                if ( cookie.split('=')[0] === 'photo' ) {
+                    resultWindow(cookie.split('=')[1]);        
+                }
+            }
+        }
+
+        const checkCookie = () => {
+            console.log(`Cookies --> ${document.cookie}`);
+        }
+
+        const getElementary = () => {
+
+            const educType = document.getElementById('selectoption_education').value === 'Начальное';
+
+            if ( document.cookie === '' ) {
+                console.log('COOKIES IS EMPTY!(getElementary)');
+
+                if ( educType ) {
+                    return 1;
+                }
+
+                return 0;
+            }
+
+            for ( const cookie of document.cookie.split('; ') ) {
+                if ( cookie.split('=')[0] === 'elementary' ) { 
+                    if ( educType ) {
+                        return parseInt(cookie.split('=')[1]) + 1 ; 
+                    } else {
+                        return parseInt(cookie.split('=')[1]);
+                    }
+                }
+            }    
+        }
+
+        const getAll = () => {
+
+            if ( document.cookie === '' ) {
+                console.log('COOKIES IS EMPTY! (getAll)');
+
+                return 1;
+            }
+
+            for ( const cookie of document.cookie.split('; ') ) {
+                if ( cookie.split('=')[0] === 'all' ) { 
+                    return parseInt(cookie.split('=')[1]) + 1 ;
+                }
+            } 
+        }
+
+        const submit = (event) => {
+
+            const elementary = getElementary();
+            const all = getAll();
+
+            document.cookie = `name=${document.getElementById('name').value}`;
+            document.cookie = `gender=${document.getElementById('selectoption_gender').value}`;
+            document.cookie = `education=${document.getElementById('selectoption_education').value}`;
+            document.cookie = `photo=${document.getElementById('selectoption_photo').value}`;
+            document.cookie = `elementary=${elementary}`;
+            document.cookie = `all=${all}`;
+ 
+            checkResult();
+            event.preventDefault();
+        }
+
+        document.getElementById('form-container').addEventListener('submit', (event) => submit(event));
+        
+    </script>
+</body>
+</html>
+

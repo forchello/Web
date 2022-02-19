@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB13</title>
+</head>
+<body>
+    <div id="main-container">
+        <embed id="layer1" 
+               class="layer1" 
+               type="image/jpg" 
+               src="src/images/locallink1.jpg" 
+               width="300" 
+               height="200"
+               tabindex="1"
+        >
+
+        <img id="layer2"
+             class="layer2" 
+             src="src/images/locallink2.jpg"
+             width="300" 
+             height="200"
+             tabindex="2"
+             autofocus
+        >
+
+        <p id="layer3" class="layer3" tabindex="3"> ПОЧЕМУ? </p>
+    </div>
+
+    <script>
+     
+        const layer1 = document.getElementById('layer1');
+        const layer2 = document.getElementById('layer2');
+        const layer3 = document.getElementById('layer3');
+
+        const clearActivity = (window) => {
+            window.onkeyup = {};
+            console.log('5 --> clear');
+
+            layer1.tabindex = 1;
+            layer2.tabindex = 2;
+            layer3.tabindex = 3;
+
+
+            layer1.style.visibility = 'visible';
+            layer2.style.visibility = 'visible';
+            layer3.style.visibility = 'visible';
+        }
+
+        const keyActivity = (event) => {
+            if ( event.code === 'KeyQ' ) {
+                window.onkeyup = (event) => {
+                    switch ( event.code ) {
+                        case 'Digit1': {
+                            window.onkeyup = {};
+                            console.log('1 layer');
+                            
+                            layer1.tabindex = 3;
+                            layer2.tabindex = 1;
+                            layer3.tabindex = 2;
+
+                            layer1.style.visibility = 'visible';
+                            layer2.style.visibility = 'hidden';
+                            layer3.style.visibility = 'hidden';
+
+                            layer1.focus();
+
+                            break;
+                        }
+                        case 'Digit2': {
+                            window.onkeyup = {};
+                            console.log('2 layer');
+
+                            layer1.tabindex = 1;
+                            layer3.tabindex = 2;
+                            layer2.tabindex = 3;
+                
+                            layer1.style.visibility = 'hidden';
+                            layer2.style.visibility = 'visible';
+                            layer3.style.visibility = 'hidden';
+
+                            layer2.focus();
+
+                            break;
+                        }
+                        case 'Digit3': {
+                            window.onkeyup = {};
+                            console.log('3 layer');
+
+                            layer1.tabindex = 1;
+                            layer2.tabindex = 2;
+                            layer3.tabindex = 3;
+                            
+
+                            layer1.style.visibility = 'hidden';
+                            layer2.style.visibility = 'hidden';
+                            layer3.style.visibility = 'visible';
+
+                            layer3.focus();
+                            
+                            break;
+                        }
+                        case 'Digit4': {
+                            window.onkeyup = {};
+                            console.log('4 layer');
+
+                            layer1.tabindex = 2;
+                            layer2.tabindex = 1;
+                            layer3.tabindex = 3;
+
+                            layer1.style.visibility = 'visible';
+                            layer2.style.visibility = 'hidden';
+
+                            // по зданию тут должно быть 2
+                            layer3.style.visibility = 'visible';
+
+                            layer1.focus();
+                            break;
+                        }
+                        case 'Digit5': {
+                            clearActivity(window);
+                        }
+
+                    }
+                }           
+            }
+        };
+
+        layer1.onkeydown = keyActivity;
+        layer2.onkeydown = keyActivity;
+        layer3.onkeydown = keyActivity;
+
+        let state = false;
+
+        const controlAction = () => {
+            if ( document.getElementById('comment') !== null ) {
+                state = false;
+                document.getElementById("comment").remove()
+            } else if  ( !state && document.activeElement.tagName !== 'BODY') {
+
+                state = true;
+                const div = document.createElement('DIV');
+                div.id = 'comment';
+                div.className = 'comment';
+                console.log(document.activeElement.className);
+
+                div.innerText = `Имя класса: ${document.activeElement.className}\n` +
+                                `Тип: ${document.activeElement.tagName}\n`;
+
+                document.body.appendChild(div);  
+            }
+        }
+
+        const shiftAction = () => {
+            if ( document.getElementById('comment') !== null ) {
+                state = false;
+                document.getElementById("comment").remove(); 
+            }
+        }
+
+        window.addEventListener('keydown', (event) => {
+            switch ( event.key ) {
+                case 'F1': {
+                    event.preventDefault();
+                    const message = 'Q + 1 = activate only 1 layer\n' +
+                                    'Q + 2 = activate only 2 layer\n' +
+                                    'Q + 3 = activate only 3 layer\n' +
+                                    'Q + 4 = activate 1 and 2/3 layer\n' +
+                                    'Q + 5 = reset layer`s activity\n' + 
+                                    'CTRL = show info about current layer\n' + 
+                                    'SHIFT = hide info about current layer\n' + 
+                                    'F1 = help';
+                    alert(message);
+                    break;
+                }
+                case 'Control': {
+                    controlAction();
+                    break;
+                }
+                case 'Shift': {
+                   shiftAction();
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
+

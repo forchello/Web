@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 40px;
+    font-family: Verdana;
+
+    color: blue;
+}
+
+.area-1:hover {
+    cursor: text;
+}
+
+.area-2:hover {
+    cursor: text;
+}

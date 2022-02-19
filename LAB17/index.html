@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB17</title>
+</head>
+<body>
+    
+    <div id="main-container">
+        <h2> Задание 1. Загрузить фото с расширением .png </h2>
+        <input type= "file" 
+               id="imageFiles" 
+               multiple 
+               accept="image/png"
+               onchange="showFiles(this.files)">
+        <div id="fileList"> </div>
+
+        <h2> Задание 2. </h2>
+        <input type= "file" 
+               id="txtFiles" 
+               multiple 
+               accept=".txt"
+               onchange="readTxt(this.files)">
+        <div id="textResult"> </div>
+    </div>
+
+    <script>
+
+        const someFiles = document.getElementById("imageFiles");
+        const fileList = document.getElementById("fileList");
+
+        const showFiles = (files) => {
+            if( files.length ) {
+                const list = document.createElement("ul");
+
+                for ( let i = 0 ; i < files.length; i++) {
+                    const li = document.createElement("li");
+
+                    list.appendChild(li);
+
+                    let img = document.createElement("img");
+
+                    img.src = window.URL.createObjectURL(files[i]);
+                    img.style.height = "60px";
+
+                    img.onload = () => { 
+                        URL.revokeObjectURL(this.src); 
+                    }
+
+                    li.appendChild(img);
+                    const info = document.createElement("span");
+
+                    info.style.color = "red";
+                    info.style.fontSize = "26px";
+                    info.innerHTML = " " + files[i].name+ ": " + files[i].size + " байтов";
+
+                    li.appendChild(info);
+                }
+
+                fileList.appendChild(list);
+
+            } else {
+                fileList.innerHTML = "<h1>Файлы не выбраны</h1>";
+            }
+        }
+    
+        const wordList = document.getElementById("textResult");
+
+        const readTxt = (files) => {
+            if ( files.length ) {
+
+                const list = document.createElement("ul");
+                const reader = new FileReader();
+
+                reader.onload = () => {
+                    const text = reader.result;
+                    const script = text.match(new RegExp(".+"));
+
+                    for ( const word of text.split(' ')) {
+                        if ( word.match(new RegExp("^[BbБб].+")) !== null ) {
+                            console.log(word);
+
+                            const li = document.createElement("li");
+
+                            list.appendChild(li);
+
+                            const h2 = document.createElement("h2");
+
+                            h2.innerText = word;
+
+                            li.appendChild(h2);
+                        }
+                    }
+
+                    wordList.appendChild(list);
+                }
+
+                reader.readAsText(files[0]);
+
+            } else {
+                wordList.innerHTML = "<h1>Файлы не выбраны</h1>";
+            }
+        }
+    </script>
+
+</body>
+</html>
+

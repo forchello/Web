@@ -1,0 +1,11 @@
+body {
+    background-color: red;
+
+    display: flex;
+    flex: 1;
+}
+
+#main-container {
+    display: flex;
+    flex: 1
+}

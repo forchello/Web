@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB14</title>
+</head>
+<body>
+    <div id="main-container">
+        <button onClick="Task1()"> Task 1 </button> 
+        <button onClick="Task2()"> Task 2 </button> 
+    </div>
+
+    <script>
+        const Task1 = () => {
+            let a = 256, b = 2, c = 1024, d = 128;
+
+            const start1 = performance.now();
+                            
+            const result1 = Math.pow(( a / b ) + ( c / d ) * (c / d), 2);
+
+            const end1 = performance.now();
+            const time1 = end1 - start1;
+            
+            console.log(result1);
+            console.log(time1);
+
+            a = 333, b = 6, c = 3532, d = 421;
+
+            const start2 = performance.now();
+                            
+            const result2 = Math.pow(( a / b ) + ( c / d ) * (c / d), 2);
+
+            const end2 = performance.now();
+            const time2 = end2 - start2;
+
+            console.log(result2);
+            console.log(time2);
+        }
+
+        const Task2 = () => {
+            
+            const start = performance.now();
+
+            const y = Math.pow(Math.round(Math.cos(Math.PI / 5)), 2) + Math.pow(Math.round(Math.sin(Math.PI / 7)), 3) + Math.SQRT2;
+
+            const end = performance.now();
+            const time = end - start;
+
+            console.log(y);
+            console.log(time);
+        }
+
+    </script>
+</body>
+</html>
+

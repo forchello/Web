@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <title>LAB11</title>
+</head>
+<body>
+    <div id="main-container">
+        <div id="div" 
+             class="div1" 
+             onmousedown="div_event_1()" 
+        > </div>
+
+        <input type="range" id="input-type-range" value ="0"/>
+    </div>
+
+    <script>       
+
+        const div_event_1 = () => {
+            // по идентификатору встроенной моделью;
+
+            console.log('event_1');
+            document.getElementById('div').className = 'new_div1';
+        }
+
+
+        const div_event_2 = () => {
+            // по отметке традиционным спосособом;
+        
+            console.log('event_2');
+            window.event.srcElement.className = 'div1';
+
+            document.body.style.backgroundColor = "black";
+            document.getElementById('input-type-range').value = 0;
+        }
+        
+        document.getElementById("div").onmouseup = div_event_2;
+
+        const checkCoordinates = (e) => {
+            // усовершенствованная модель
+
+            console.log('event_3');
+            
+            const max_X = window.innerWidth;
+            const value = Math.round(( e.offsetX * 100 ) / max_X);
+
+            document.getElementById('input-type-range').value = value;
+
+
+            const componentToHex = (c) => {
+                const hex = c.toString(16);
+                return hex.length == 1 ? "0" + hex : hex;
+            }
+
+            const rgbToHex = (r, g, b) => {
+                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            }
+
+            document.body.style.backgroundColor = rgbToHex(value * 2, 0, 0);  
+            
+            // throw new Error("GHBDTN");
+        }
+
+        document.getElementById('div').addEventListener('mousemove', e => checkCoordinates(e) );
+
+        window.onerror = function (message, file, line, column, errorObj) {
+            if ( errorObj !== undefined) {
+                alert('При загрузке Web-страницы произошла ошибка:\n'+
+                            'причина: ' + message + '\n'+
+                            'скрипт: ' + file + '\n'+
+                            'строка: ' + line + '\n'+
+                            'номер символа: '+ column + '\n' +
+                            'Error: ' + errorObj.stack);
+            } 
+        }
+
+    </script>
+</body>
+</html>

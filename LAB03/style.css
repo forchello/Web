@@ -1,0 +1,57 @@
+div {
+    margin-top: 50px; 
+    margin-left: 100px;
+    height: 85px; 
+    width: 200px; 
+
+    text-align: center;
+    font-size: 29px;
+    font-weight: 800;
+}
+
+.d1 {
+    background-color: red;
+}
+
+.d2 {
+    background-color: green;
+
+    outline-style: inset;
+    outline-width: 11;
+    outline-color: red;
+}
+
+.d3 {
+    background-color: yellow;
+
+    outline-style: inset;
+    outline-width: 11;
+    outline-color: red;
+
+    border-radius: 10% 30% 50%;
+}
+
+
+.d4 {
+    background-color: blue;
+
+    outline-style: inset;
+    outline-width: 11;
+    outline-color: red;
+
+    box-shadow: -7px 11px 4px 9px black;
+}
+
+.d5 {
+    background-color: violet;
+
+    outline-style: inset;
+    outline-width: 11;
+    outline-color: red;
+
+    transform: translateX(0px) translateY(190px) scaleX(1.75) rotate(15turn) skewX(40deg);
+}
+
+.d5:hover {
+    transform: none;
+}

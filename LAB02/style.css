@@ -1,0 +1,12 @@
+.header1 {
+    text-align: center; 
+    color: maroon; 
+    font-family: Verdana;
+    font-weight: 600;
+    font-size: 26px;
+    letter-spacing: 6px;
+}
+
+.text-container {
+    margin: 70px 50px 20px 50px
+}
